@@ -2,10 +2,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: wind-turbine
-  namespace: openshift-gitops
+  namespace: quinoa-wind-turbine
 spec:
   destination:
-    namespace: demo
+    namespace: quinoa-wind-turbine
     server: https://kubernetes.default.svc
   project: default
   source:
