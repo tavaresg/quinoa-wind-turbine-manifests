@@ -7,7 +7,7 @@ spec:
     - default: 1.0.0
       name: IMAGE_TAG
       type: string
-    - default: quay.io/gtavares_pessoals/quinoa-wind-turbine
+    - default: quay.io/gtavares_pessoal/quinoa-wind-turbine
       name: IMAGE_NAME
       type: string
     - default: 'https://github.com/tavaresg/quinoa-wind-turbine.git'
