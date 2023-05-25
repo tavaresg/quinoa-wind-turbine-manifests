@@ -9,7 +9,5 @@ images:
   name: quay.io/gtavares_pesoal/quinoa-wind-turbine
 - digest: sha256:2f79db43b0aa178838b4dd6af90f010ae41d01d46aa52ef11cadaea2aa7ab558
   name: quay.io/gtavares_pessoal/quinoa-wind-turbine
-- digest: sha256:e907bfa8f46884f78e03c57df16677b862493efdc6d0f78d3fb8e11617f325e7
-  name: quay.io/gtavares_pessoals/quinoa-wind-turbine
 - digest: sha256:637371bd10f05735fd77d6109e46a863455f5f57392cd070a472e9c2a07fc4c3
   name: quay.io/rhdevelopers/quinoa-wind-turbine
