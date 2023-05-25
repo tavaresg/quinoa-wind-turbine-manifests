@@ -116,7 +116,7 @@ spec:
         - name: GIT_REF
           value: $(params.MANIFESTS_GIT_BRANCH)
         - name: NEW_IMAGE
-          value: quay.io/gtavares_pessoals/quinoa-wind-turbine
+          value: quay.io/gtavares_pessoal/quinoa-wind-turbine
         - name: NEW_DIGEST
           value: $(tasks.buildah.results.IMAGE_DIGEST)
         - name: KUSTOMIZATION_PATH
