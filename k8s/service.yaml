@@ -2,9 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
+    discovery.3scale.net/port: '8443'
+    discovery.3scale.net/scheme: https
     openshift.io/generated-by: OpenShiftWebConsole
   creationTimestamp: "2022-09-07T10:55:39Z"
   labels:
+    discovery.3scale.net: 'true'
     app: quinoa-wind-turbine
     app.kubernetes.io/component: quinoa-wind-turbine
     app.kubernetes.io/instance: quinoa-wind-turbine
