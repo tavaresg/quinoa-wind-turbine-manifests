@@ -7,7 +7,8 @@ metadata:
     openshift.io/generated-by: OpenShiftWebConsole
   creationTimestamp: "2022-09-07T10:55:39Z"
   labels:
-    discovery.3scale.net: 'true' # 3Scale
+    discovery.3scale.net: 'true'
+    mock.label.test: mock
     app: quinoa-wind-turbine
     app.kubernetes.io/component: quinoa-wind-turbine
     app.kubernetes.io/instance: quinoa-wind-turbine
