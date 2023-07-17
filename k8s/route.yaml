@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/name: quinoa-wind-turbine
     app.kubernetes.io/part-of: wind-turbine
     app.openshift.io/runtime-version: 1.0.0
-  name: quinoa-wind-turbine
+  name: rt
 spec:
   port:
     targetPort: 8080-tcp
