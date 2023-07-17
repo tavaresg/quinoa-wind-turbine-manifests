@@ -3,6 +3,7 @@ kind: Route
 metadata:
   annotations:
     openshift.io/host.generated: "true"
+    kubernetes.io/tls-acme: 'true'
   labels:
     app: quinoa-wind-turbine
     app.kubernetes.io/component: quinoa-wind-turbine
