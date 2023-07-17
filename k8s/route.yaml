@@ -20,6 +20,6 @@ spec:
     termination: edge
   to:
     kind: Service
-    name: quinoa-wind-turbine
+    name: svc
     weight: 100
   wildcardPolicy: None
