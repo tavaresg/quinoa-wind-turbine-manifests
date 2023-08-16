@@ -1,0 +1,148 @@
+apiVersion: apps/v1	
+kind: StatefulSet	
+metadata:	
+  annotations:	
+    meta.helm.sh/release-name: infinispan	
+    meta.helm.sh/release-namespace: prod-apps	
+    openshift.io/display-name: Infinispan Cluster	
+    openshift.io/documentation-url: 'http://infinispan.org/documentation/'	
+  labels:	
+    app.kubernetes.io/instance: wind-turbine	
+    app.kubernetes.io/managed-by: Helm	
+    app.kubernetes.io/part-of: wind-turbine	
+    app.kubernetes.io/version: '14.0'	
+    clusterName: infinispan	
+    helm.sh/chart: infinispan-0.3.2	
+    meta.helm.sh/release-name: infinispan	
+    meta.helm.sh/release-namespace: prod-apps	
+  name: infinispan	
+  namespace: prod-apps	
+spec:	
+  podManagementPolicy: OrderedReady	
+  replicas: 1	
+  revisionHistoryLimit: 10	
+  selector:	
+    matchLabels:	
+      app: infinispan-pod	
+      clusterName: infinispan	
+  serviceName: ''	
+  template:	
+    metadata:	
+      annotations:	
+        checksum/config: f75b571611db4be1febbc66b01a1eaacb6fc247935d6ca99e237102b464cfcbf	
+        checksum/identities: cd9a040981c25f81fc061a62e555e7862f8ef500e37b50ec1d7151bcd306c6aa	
+      creationTimestamp: null	
+      labels:	
+        app: infinispan-pod	
+        clusterName: infinispan	
+    spec:	
+      affinity:	
+        podAntiAffinity:	
+          preferredDuringSchedulingIgnoredDuringExecution:	
+            - podAffinityTerm:	
+                labelSelector:	
+                  matchLabels:	
+                    app: infinispan-pod	
+                    clusterName: infinispan	
+                topologyKey: kubernetes.io/hostname	
+              weight: 100	
+      containers:	
+        - args:	
+            - '--cluster-name=infinispan'	
+            - '--server-config=/etc/config/infinispan.yml'	
+            - '--logging-config=/etc/config/log4j2.xml'	
+            - '--bind-address=0.0.0.0'	
+            - '-Djgroups.dns.query=infinispan-ping.prod-apps.svc.cluster.local'	
+          env:	
+            - name: JAVA_OPTIONS	
+            - name: IDENTITIES_BATCH	
+              value: /etc/security/identities-batch	
+            - name: SERVER_LIBS	
+          image: 'quay.io/infinispan/server:14.0'	
+          imagePullPolicy: Always	
+          livenessProbe:	
+            failureThreshold: 5	
+            httpGet:	
+              path: rest/v2/cache-managers/default/health/status	
+              port: 11222	
+              scheme: HTTP	
+            initialDelaySeconds: 10	
+            periodSeconds: 10	
+            successThreshold: 1	
+            timeoutSeconds: 80	
+          name: infinispan	
+          ports:	
+            - containerPort: 8888	
+              name: ping	
+              protocol: TCP	
+            - containerPort: 11222	
+              name: infinispan	
+              protocol: TCP	
+            - containerPort: 11223	
+              name: infinispan-met	
+              protocol: TCP	
+          readinessProbe:	
+            failureThreshold: 5	
+            httpGet:	
+              path: rest/v2/cache-managers/default/health/status	
+              port: 11222	
+              scheme: HTTP	
+            initialDelaySeconds: 10	
+            periodSeconds: 10	
+            successThreshold: 1	
+            timeoutSeconds: 80	
+          resources:	
+            limits:	
+              cpu: 500m	
+              memory: 512Mi	
+            requests:	
+              cpu: 500m	
+              memory: 512Mi	
+          startupProbe:	
+            failureThreshold: 60	
+            httpGet:	
+              path: rest/v2/cache-managers/default/health/status	
+              port: 11222	
+              scheme: HTTP	
+            initialDelaySeconds: 10	
+            periodSeconds: 10	
+            successThreshold: 1	
+            timeoutSeconds: 80	
+          terminationMessagePath: /dev/termination-log	
+          terminationMessagePolicy: File	
+          volumeMounts:	
+            - mountPath: /etc/config	
+              name: config-volume	
+            - mountPath: /opt/infinispan/server/data	
+              name: data-volume	
+            - mountPath: /etc/security	
+              name: identities-volume	
+      dnsPolicy: ClusterFirst	
+      restartPolicy: Always	
+      schedulerName: default-scheduler	
+      securityContext: {}	
+      terminationGracePeriodSeconds: 30	
+      volumes:	
+        - configMap:	
+            defaultMode: 420	
+            name: infinispan-configuration	
+          name: config-volume	
+        - name: identities-volume	
+          secret:	
+            defaultMode: 420	
+            secretName: infinispan-generated-secret	
+  updateStrategy:	
+    type: RollingUpdate	
+  volumeClaimTemplates:	
+    - apiVersion: v1	
+      kind: PersistentVolumeClaim	
+      metadata:	
+        creationTimestamp: null	
+        name: data-volume	
+      spec:	
+        accessModes:	
+          - ReadWriteOnce	
+        resources:	
+          requests:	
+            storage: 1Gi	
+        volumeMode: Filesystem
