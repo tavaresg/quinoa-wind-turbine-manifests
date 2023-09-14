@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:	
   annotations:	
     meta.helm.sh/release-name: infinispan	
-    meta.helm.sh/release-namespace: prod-apps	
+    meta.helm.sh/release-namespace: dev-apps
     openshift.io/display-name: Infinispan Cluster	
     openshift.io/documentation-url: 'http://infinispan.org/documentation/'	
   labels:	
@@ -14,9 +14,9 @@ metadata:
     clusterName: infinispan	
     helm.sh/chart: infinispan-0.3.2	
     meta.helm.sh/release-name: infinispan	
-    meta.helm.sh/release-namespace: prod-apps	
+    meta.helm.sh/release-namespace: dev-apps	
   name: infinispan	
-  namespace: prod-apps	
+  namespace: dev-apps	
 spec:	
   podManagementPolicy: OrderedReady	
   replicas: 1	
@@ -52,7 +52,7 @@ spec:
             - '--server-config=/etc/config/infinispan.yml'	
             - '--logging-config=/etc/config/log4j2.xml'	
             - '--bind-address=0.0.0.0'	
-            - '-Djgroups.dns.query=infinispan-ping.prod-apps.svc.cluster.local'	
+            - '-Djgroups.dns.query=infinispan-ping.dev-apps.svc.cluster.local'	
           env:	
             - name: JAVA_OPTIONS	
             - name: IDENTITIES_BATCH	
