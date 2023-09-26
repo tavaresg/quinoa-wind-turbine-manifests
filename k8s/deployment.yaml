@@ -14,7 +14,7 @@ metadata:
   name: quinoa-wind-turbine
 spec:
   progressDeadlineSeconds: 600
-  replicas: 3
+  replicas: 4
   revisionHistoryLimit: 10
   selector:
     matchLabels:
