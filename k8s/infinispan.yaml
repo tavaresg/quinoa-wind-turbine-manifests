@@ -3,18 +3,16 @@ kind: StatefulSet
 metadata:	
   annotations:	
     meta.helm.sh/release-name: infinispan	
-    meta.helm.sh/release-namespace: dev-apps
     openshift.io/display-name: Infinispan Cluster	
     openshift.io/documentation-url: 'http://infinispan.org/documentation/'	
   labels:	
-    app.kubernetes.io/instance: wind-turbine-prd	
+    app.kubernetes.io/instance: wind-turbine
     app.kubernetes.io/managed-by: Helm	
     app.kubernetes.io/part-of: wind-turbine	
     app.kubernetes.io/version: '14.0'	
     clusterName: infinispan	
     helm.sh/chart: infinispan-0.3.2	
     meta.helm.sh/release-name: infinispan	
-    meta.helm.sh/release-namespace: dev-apps	
   name: infinispan	
   namespace: dev-apps	
 spec:	
