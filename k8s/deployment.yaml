@@ -55,15 +55,15 @@ spec:
             scheme: HTTP
             path: /q/health/ready
             port: 8080
-          initialDelaySeconds: 150
-          periodSeconds: 10
+          initialDelaySeconds: 100
+          periodSeconds: 8
         livenessProbe:
           httpGet:
             scheme: HTTP
             path: /q/health/live
             port: 8080
-          initialDelaySeconds: 150
-          periodSeconds: 10
+          initialDelaySeconds: 100
+          periodSeconds: 8
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
