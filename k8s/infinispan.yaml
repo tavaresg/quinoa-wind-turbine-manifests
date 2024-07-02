@@ -14,7 +14,7 @@ metadata:
     helm.sh/chart: infinispan-0.3.2	
     meta.helm.sh/release-name: infinispan	
   name: infinispan	
-  namespace: dev-apps	
+  namespace: race-demo-live
 spec:	
   podManagementPolicy: OrderedReady	
   replicas: 1	
