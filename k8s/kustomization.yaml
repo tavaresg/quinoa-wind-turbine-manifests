@@ -5,5 +5,5 @@ resources:
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
-- digest: sha256:3b9e38a9a7527160a7290fde62d7f7012d3ede70dc982eab191e24770c048141
+- digest: sha256:6134d3d818af4b00941822a191e72fd62419e173ec9cce31da9d20967148cd5e
   name: quay.io/gtavares_pessoal/quinoa-wind-turbine
